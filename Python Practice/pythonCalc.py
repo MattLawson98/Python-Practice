@@ -2,9 +2,10 @@
 
 import sys
 
-
+#working on importing the widgets 
 from PyQt6.QtWidgets import QApplication, QLabel, QWidget
 
+#creating a calculator window
 app = QApplication([])
 
 window = QWidget()
