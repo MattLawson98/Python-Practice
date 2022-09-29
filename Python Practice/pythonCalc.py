@@ -1,4 +1,6 @@
-# hello.py
+#Have been working on fixing pythonCalc to be able to run
+#Currently won't run with libEGL.so.1: cannot open shared object file: No such file or directory
+
 
 import sys
 
