@@ -42,8 +42,18 @@ class Cell:
     self.cell_btn_object.configure(bg ="red")
     
   def show_cell(self):
-    print(self.get_cell_by_axis(0,0))
-  
+    surrounded_cells = [
+      self.get_cell_by_axis(self.x - 1, self.y - 1),
+      self.get_cell_by_axis(self.x - 1, self.y),
+      self.get_cell_by_axis(self.x - 1, self.y + 1),
+      self.get_cell_by_axis(self.x , self.y - 1),
+      self.get_cell_by_axis(self.x + 1, self.y - 1),
+      self.get_cell_by_axis(self.x + 1, self.y ),
+      self.get_cell_by_axis(self.x + 1, self.y + 1),
+      self.get_cell_by_axis(self.x, self.y + 1),
+    ]
+    print(surrounded_cells)
+    
   def right_click_actions(self, event):
     print(event)
     print("I am right clicked!") 
