@@ -49,6 +49,10 @@ for x in range(settings.Grid_size):
       row=y
     )
     
+#Call label for cell count
+Cell.create_cell_count_label(left_frame)
+Cell.cell_count_label.place(x=0, y=0)
+    
 Cell.randomize_mines()
   
 
