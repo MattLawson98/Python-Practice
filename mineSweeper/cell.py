@@ -1,4 +1,4 @@
-from tkinter import Button, Label
+from tkinter import Button, Label, font
 import settings
 import random
 
@@ -6,10 +6,12 @@ import random
 
 class Cell:
   all = []
+  cell_count = settings.Cell_count
   cell_count_label = None
   
   def __init__(self,x,y, is_mine=False):
     self.is_mine = is_mine
+    self.is_opened = False
     self.cell_btn_object = None
     self.x = x
     self.y = y
@@ -31,7 +33,10 @@ class Cell:
   def create_cell_count_label(location):
     lbl = Label(
       location,
-      text=f"Cells Left:{settings.Cell_count}"
+      bg='black',
+      fg='white',
+      text=f"Cells Left:{Cell.cell_count}",
+      font=("",30)
     )
     Cell.cell_count_label = lbl
   
@@ -78,7 +83,16 @@ class Cell:
     return counter
   
   def show_cell(self):
-    self.cell_btn_object.configure(text=self.surrounded_cells_mines)
+    if not self.is_opened:
+      Cell.cell_count -= 1
+      self.cell_btn_object.configure(text=self.surrounded_cells_mines)
+      # Adjust cell count on click event
+      if Cell.cell_count_label:
+        Cell.cell_count_label.configure(
+          text=f"Cells Left:{Cell.cell_count}"
+        )
+      # Adjust the cell to be opened in logic
+      self.is_opened = True
   
   #Need to interupt game and display game over
   def show_mine(self):
