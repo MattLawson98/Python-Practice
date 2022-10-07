@@ -1,8 +1,8 @@
-from tkinter import Button, Label, font
+from tkinter import Button, Label, font, messagebox
 import settings
 import random
-from ctypes import *
-from utils import popupmsg
+
+
 
 
 class Cell:
@@ -25,10 +25,12 @@ class Cell:
       location,
       width=12,
       height=4,
+      bg = 'light grey'
     )
     btn.bind('<Button-1>',self.left_click_actions)#Left click
     btn.bind('<Button-3>',self.right_click_actions)#Right click
     self.cell_btn_object = btn
+    
   
   @staticmethod 
   def create_cell_count_label(location):
@@ -59,7 +61,7 @@ class Cell:
       self.is_mine_candidate = True
     else:
       self.cell_btn_object.configure(
-        bg='SystemButtonFace'
+        bg='light grey'
       )
       self.is_mine_candidate = False
     
@@ -106,13 +108,21 @@ class Cell:
         Cell.cell_count_label.configure(
           text=f"Cells Left:{Cell.cell_count}"
         )
+        #If this is seleted as possible mine revert color
+        self.cell_btn_object.configure(
+          bg='light grey' 
+        )
       # Adjust the cell to be opened in logic
       self.is_opened = True
   
   #Need to interupt game and display game over
   def show_mine(self):
-    popupmsg('You Clicked a mine', 'Game Over')
-    self.cell_btn_object.configure(bg ="red")
+    self.cell_btn_object.configure(
+        bg='red'
+    )
+    messagebox.showinfo("Game Over", "You Clicked a mine")
+    exit()
+   
     
   
   
