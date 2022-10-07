@@ -1,17 +1,17 @@
 from tkinter import Button, Label, font
 import settings
 import random
-
+from ctypes import *
 
 
 class Cell:
   all = []
   cell_count = settings.Cell_count
   cell_count_label = None
-  
   def __init__(self,x,y, is_mine=False):
     self.is_mine = is_mine
     self.is_opened = False
+    self.is_mine_candidate = False
     self.cell_btn_object = None
     self.x = x
     self.y = y
@@ -49,6 +49,20 @@ class Cell:
        for cell_obj in self.surrounded_cells:
          cell_obj.show_cell()
      self.show_cell()
+     
+  def right_click_actions(self, event):
+    if not self.is_mine_candidate:
+      self.cell_btn_object.configure(
+        bg='orange'
+      )
+      self.is_mine_candidate = True
+    else:
+      self.cell_btn_object.configure(
+        bg='SystemButtonFace'
+      )
+      self.is_mine_candidate = False
+    
+      
   
   def get_cell_by_axis(self, x,y):
     #Return cell values based off x and y values
@@ -96,11 +110,10 @@ class Cell:
   
   #Need to interupt game and display game over
   def show_mine(self):
+    
     self.cell_btn_object.configure(bg ="red")
     
-  def right_click_actions(self, event):
-    print(event)
-    print("I am right clicked!") 
+  
   
   @staticmethod
   def randomize_mines():
