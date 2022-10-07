@@ -2,6 +2,7 @@ from tkinter import Button, Label, font
 import settings
 import random
 from ctypes import *
+from utils import popupmsg
 
 
 class Cell:
@@ -110,7 +111,7 @@ class Cell:
   
   #Need to interupt game and display game over
   def show_mine(self):
-    
+    popupmsg('You Clicked a mine', 'Game Over')
     self.cell_btn_object.configure(bg ="red")
     
   
