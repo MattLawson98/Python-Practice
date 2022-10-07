@@ -25,7 +25,7 @@ class Cell:
       location,
       width=12,
       height=4,
-      bg = 'light grey'
+      bg = 'light gray'
     )
     btn.bind('<Button-1>',self.left_click_actions)#Left click
     btn.bind('<Button-3>',self.right_click_actions)#Right click
@@ -52,6 +52,15 @@ class Cell:
        for cell_obj in self.surrounded_cells:
          cell_obj.show_cell()
      self.show_cell()
+     #cancel events if cell clicked
+     self.cell_btn_object.unbind('<Button-1>')
+     self.cell_btn_object.unbind('<Button-3>')
+     #If mine count = cell left player has won
+     if Cell.cell_count == settings.Mines_count:
+        messagebox.showinfo("Game Over", "You Have Won!")
+        exit()
+     
+  
      
   def right_click_actions(self, event):
     if not self.is_mine_candidate:
@@ -61,7 +70,7 @@ class Cell:
       self.is_mine_candidate = True
     else:
       self.cell_btn_object.configure(
-        bg='light grey'
+        bg='light gray'
       )
       self.is_mine_candidate = False
     
